@@ -14,9 +14,9 @@ import os
 # Optional: add contact me email functionality (Day 60)
 # import smtplib
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv() # Loads variables from .env into os.environ
+# load_dotenv() # Loads variables from .env into os.environ
 
 '''
 Make sure the required packages are installed: 
@@ -33,7 +33,7 @@ This will install the packages from the requirements.txt for this project.
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv("FLASK_KEY")
+app.config['SECRET_KEY'] = os.environ.get("FLASK_KEY")
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
@@ -65,7 +65,7 @@ class Base(DeclarativeBase):
 # Get the full path of the database file
 db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'instance', 'posts.db')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DB_URI", f'sqlite:///{db_path}')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", f'sqlite:///{db_path}')
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
